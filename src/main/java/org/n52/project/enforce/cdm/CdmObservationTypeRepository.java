@@ -14,6 +14,6 @@ import org.springframework.data.repository.query.Param;
  */
 public interface CdmObservationTypeRepository extends JpaRepository<CdmObservationType, Integer> {
     
-    @Query("select d from CdmObservationType as d where d.name ilike :name")
-    CdmObservationType findByName(@Param("name") String name);
+    @Query("select d from CdmObservationType as d where d.code ilike :code")
+    CdmObservationType findByName(@Param("code") String code);
 }

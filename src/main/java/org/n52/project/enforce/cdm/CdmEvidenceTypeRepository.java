@@ -1,5 +1,7 @@
 package org.n52.project.enforce.cdm;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -16,4 +18,7 @@ public interface CdmEvidenceTypeRepository extends JpaRepository<CdmEvidenceType
     
     @Query("select d from CdmEvidenceType as d where d.name ilike :name")
     CdmEvidenceType findByName(@Param("name") String name);
+    
+    @Query("select d.id from CdmEvidenceType as d where d.name ilike :name")
+    Optional<Integer> getIdForName(@Param("name") String name);
 }

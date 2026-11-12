@@ -10,10 +10,8 @@
 	<artifactId>common-data-model</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<openapi-spec>/src/main/resources/specs/data-management/enforce_geoquest_dataAccessAPI.yaml</openapi-spec>
-		<base-package>org.n52.project.enforce.geoquest</base-package>
-		<remote.package>org.n52.project.enforce.geoquest.remote</remote.package>
-		<input.spec>https://geoqapi.main.geo-wiki.org/swagger/v1/swagger.json</input.spec>
+		<openapi-spec>/src/main/resources/specs/data-management/enforce_cdm_dataAccessAPI.yaml</openapi-spec>
+		<base-package>org.n52.project.enforce.cdm</base-package>
 		<argLine/>
 	</properties>
 

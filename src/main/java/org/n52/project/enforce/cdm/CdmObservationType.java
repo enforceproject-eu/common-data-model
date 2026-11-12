@@ -27,8 +27,8 @@ public class CdmObservationType {
     private Integer id;
     
     @Column(
-            name = "name")
-    private String name;
+            name = "code")
+    private String code;
     
     @Column(
             name = "name_eng")
@@ -40,22 +40,22 @@ public class CdmObservationType {
         this.id = id;
     }
 
-    public CdmObservationType(Integer id, String name, String nameEng) {
+    public CdmObservationType(Integer id, String code, String nameEng) {
         this(id);
-        this.name = name;
+        this.code = code;
         this.nameEng = nameEng;
     }
 
-    public CdmObservationType(String name, String nameEng) {
+    public CdmObservationType(String code, String nameEng) {
         this();
-        this.name = name;
+        this.code = code;
         this.nameEng = nameEng;
     }
 
-    public CdmObservationType(String name) {
+    public CdmObservationType(String code) {
         this();
-        this.name = name;
-        this.nameEng = name;
+        this.code = code;
+        this.nameEng = "";
     }
 
     public Integer getId() {
@@ -66,12 +66,12 @@ public class CdmObservationType {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getCode() {
+        return code;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setCode(String code) {
+        this.code = code;
     }
 
     public String getNameEng() {
@@ -86,7 +86,7 @@ public class CdmObservationType {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append("id: " + id + ", ");
-        sb.append("name" + name + ", ");
+        sb.append("code" + code + ", ");
         sb.append("nameEng" + nameEng);
         return sb.toString();
     }

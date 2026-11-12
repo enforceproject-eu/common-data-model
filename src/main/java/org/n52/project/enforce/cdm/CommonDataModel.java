@@ -4,6 +4,10 @@ import java.time.OffsetDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 /**
@@ -19,6 +23,11 @@ import jakarta.persistence.Table;
         name = "common_data_model")
 public class CommonDataModel {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "common_data_model_generator")
+    @SequenceGenerator(name = "common_data_model_generator", sequenceName = "common_data_model_seq", allocationSize = 1)
+    private Integer id;
+
     @Column(
             name = "authority_notified")
     private Boolean authorityNotified;
@@ -33,7 +42,7 @@ public class CommonDataModel {
 
     @Column(
             name = "case_study_id")
-    private String caseStudyId;
+    private int caseStudyId = 1;
 
     @Column(
             name = "chain_of_custody_reference")
@@ -60,8 +69,7 @@ public class CommonDataModel {
     private String evidenceId;
 
     @Column(
-            name = "geometry",
-            columnDefinition = "geometry(Point,4326)")
+            name = "geometry")
     private String geometry;
 
     @Column(
@@ -130,85 +138,85 @@ public class CommonDataModel {
 
     @Column(
             name = "sensitive_content_flag_id")
-    private int sensitiveContentFlagId;
+    private int sensitiveContentFlagId = 1;
 
     @Column(
             name = "observation_type_id")
-    private int observationTypeId;
+    private int observationTypeId = 1;
 
     @Column(
             name = "observed_property_id")
-    private int observedPropertyId;
+    private int observedPropertyId = 1;
 
     @Column(
             name = "unit_id")
-    private int unitId;
+    private int unitId = 1;
 
     @Column(
             name = "category_id")
-    private int categoryId;
+    private int categoryId = 1;
 
     @Column(
             name = "location_source_id")
-    private int locationSourceId;
+    private int locationSourceId = 1;
 
     @Column(
             name = "contributor_role_id")
-    private int contributorRoleId;
+    private int contributorRoleId = 1;
 
     @Column(
             name = "collection_method_id")
-    private int collectionMethodId;
+    private int collectionMethodId = 1;
 
     @Column(
             name = "evidence_type_id")
-    private int evidenceTypeId;
+    private int evidenceTypeId = 1;
 
     @Column(
             name = "validation_status_id")
-    private int validationStatusId;
+    private int validationStatusId = 1;
 
     @Column(
             name = "validation_method_id")
-    private int validationMethodId;
+    private int validationMethodId = 1;
 
     @Column(
             name = "access_level_id")
-    private int accessLevelId;
+    private int accessLevelId = 1;
 
     @Column(
             name = "retention_class_id")
-    private int retentionClassId;
+    private int retentionClassId = 1;
 
     @Column(
             name = "compliance_relevance_id")
-    private int complianceRelevanceId;
+    private int complianceRelevanceId = 1;
 
     @Column(
             name = "suspected_violation_type_id")
-    private int suspectedViolationTypeId;
+    private int suspectedViolationTypeId = 1;
 
     @Column(
             name = "regulatory_domain_id")
-    private int regulatoryDomainId;
+    private int regulatoryDomainId = 1;
 
     @Column(
             name = "evidence_status_id")
-    private int evidenceStatusId;
+    private int evidenceStatusId = 1;
 
     @Column(
             name = "evidence_access_restriction_id")
-    private int evidenceAccessRestrictionId;
+    private int evidenceAccessRestrictionId = 1;
 
     @Column(
             name = "device_or_sensor_id")
-    private int deviceOrSensorId;
+    private int deviceOrSensorId = 1;
 
     @Column(
             name = "licence_id")
-    private int licenceId;
+    private int licenceId = 1;
 
-    public CommonDataModel(String caseStudyId, OffsetDateTime createdAt, OffsetDateTime modifiedAt,
+    public CommonDataModel(int caseStudyId, OffsetDateTime createdAt, OffsetDateTime modifiedAt,
             String observationId, OffsetDateTime observationTime, Boolean personalDataFlag, String recordVersion,
             OffsetDateTime submissionTime, int observationTypeId, int observedPropertyId, int collectionMethodId,
             int validationStatusId, int accessLevelId, int licenceId) {
@@ -226,6 +234,14 @@ public class CommonDataModel {
         this.validationStatusId = validationStatusId;
         this.accessLevelId = accessLevelId;
         this.licenceId = licenceId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Boolean getAuthorityNotified() {
@@ -252,11 +268,11 @@ public class CommonDataModel {
         this.campaignId = campaignId;
     }
 
-    public String getCaseStudyId() {
+    public int getCaseStudyId() {
         return caseStudyId;
     }
 
-    public void setCaseStudyId(String caseStudyId) {
+    public void setCaseStudyId(int caseStudyId) {
         this.caseStudyId = caseStudyId;
     }
 
