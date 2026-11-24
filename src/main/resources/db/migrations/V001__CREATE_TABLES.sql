@@ -684,4 +684,28 @@ $BODY$
 $BODY$
 LANGUAGE SQL;
     
+create or replace function filter(propertyName text, value text)
+returns table (t1 public.cdm_full_properties) as $$
+begin
+  return query execute format('select * from public.cdm_full_properties where %s=''%s''', $1, $2);
+end;
+$$ language plpgsql;
+   
+CREATE OR REPLACE FUNCTION ST_CommonDataModelToGeoJsonFilter(propertyName text, value text)
+RETURNS jsonb AS
+$BODY$
+    SELECT jsonb_build_object(
+        'type',     'FeatureCollection',
+        'features', jsonb_agg(feature)
+    )
+    FROM (
+      SELECT jsonb_build_object(
+        'type',       'Feature',
+        'id',         row.id,
+        'geometry',   ST_GeomFromGeoJSON(geometry),
+        'properties', to_jsonb(row) - 'id' - 'geometry'
+      ) AS feature
+      FROM (SELECT * FROM filter($1, $2)) row) features;
+$BODY$
+LANGUAGE SQL;
     

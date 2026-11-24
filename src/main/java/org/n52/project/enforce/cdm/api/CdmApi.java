@@ -7,29 +7,21 @@ package org.n52.project.enforce.cdm.api;
 
 import org.n52.project.enforce.cdm.model.Error;
 import org.n52.project.enforce.cdm.model.FeatureCollection;
-import io.swagger.v3.oas.annotations.ExternalDocumentation;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.Parameters;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.media.ExampleObject;
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 import jakarta.annotation.Generated;
+import jakarta.validation.Valid;
 
 @Generated(value = "org.openapitools.codegen.languages.SpringCodegen", date = "2026-11-11T11:21:39.342594600+01:00[Europe/Berlin]", comments = "Generator version: 7.25.0")
 @Validated
@@ -41,6 +33,7 @@ public interface CdmApi {
      * GET /cdm_data : get data in the Common Data Model format
      * get data in the Common Data Model format
      *
+     * @param filterExpression Filter expression (propertyName=value) (optional)
      * @return OK (status code 200)
      *         or Invalid status value (status code 400)
      *         or API key is missing or invalid (status code 401)
@@ -80,8 +73,6 @@ public interface CdmApi {
         value = CdmApi.PATH_GET_CDM_DATA,
         produces = { "application/vnd.geo+json", "application/json" }
     )
-    ResponseEntity<?> getCdmData(
-        
-    );
+    ResponseEntity<?> getCdmData(@Parameter(name = "filter_expression", description = "Filter expression (propertyName=value)", required = false, in = ParameterIn.QUERY) @Valid @RequestParam(value = "filter_expression", required = false) String filterExpression);
 
 }

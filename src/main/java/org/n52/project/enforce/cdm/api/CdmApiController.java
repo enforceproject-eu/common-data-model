@@ -41,12 +41,13 @@ public class CdmApiController implements CdmApi {
     }
 
     @Override
-    public ResponseEntity<?> getCdmData() {
+    public ResponseEntity<?> getCdmData(@Valid String filterExpression) {
         try {
             return ResponseEntity.ok(commonDataModelRepository.getGeoJson());
         } catch (Exception e) {
             return ResponseEntity.internalServerError().body(e.getMessage());
         }
     }
+
 
 }

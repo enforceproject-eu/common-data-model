@@ -1,7 +1,10 @@
 package org.n52.project.enforce.cdm;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * <p>
@@ -13,7 +16,9 @@ import org.springframework.data.jpa.repository.Query;
  */
 public interface CommonDataModelRepository extends JpaRepository<CommonDataModel, Integer> {
  
-
+    @Query("select c from CommonDataModel as c where :propertyName = :value")
+    List<CommonDataModel> filter(@Param("propertyName") String propertyName, @Param("value") String value);
+    
     /**
      * <p>
      * getGeoJson.
@@ -24,4 +29,14 @@ public interface CommonDataModelRepository extends JpaRepository<CommonDataModel
     @Query("select st_commondatamodeltogeojson()")
     String getGeoJson();
     
+    /**
+     * <p>
+     * getGeoJson.
+     * </p>
+     * 
+     * @return a {@link String} object
+     */
+    @Query("select st_commondatamodeltogeojsonfilter(:propertyName, :value)")
+    String getGeoJson(@Param("propertyName") String propertyName, @Param("value") String value);
+        
 }
