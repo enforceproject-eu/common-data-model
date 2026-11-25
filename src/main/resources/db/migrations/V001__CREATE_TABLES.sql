@@ -495,7 +495,7 @@ CREATE TABLE IF NOT EXISTS public.common_data_model
     processing_activity_ref character varying(255),
     protocol_id character varying(255),
     protocol_version character varying(255),
-    provenance_record character varying(255),
+    provenance_record character varying(4096),
     quality_score double precision,
     record_version character varying(255),
     submission_time timestamp with time zone,
@@ -684,14 +684,14 @@ $BODY$
 $BODY$
 LANGUAGE SQL;
     
-create or replace function filter(propertyName text, value text)
+create or replace function filter(filter_expression text)
 returns table (t1 public.cdm_full_properties) as $$
 begin
-  return query execute format('select * from public.cdm_full_properties where %s=''%s''', $1, $2);
+  return query execute format('select * from public.cdm_full_properties where %s', $1);
 end;
 $$ language plpgsql;
    
-CREATE OR REPLACE FUNCTION ST_CommonDataModelToGeoJsonFilter(propertyName text, value text)
+CREATE OR REPLACE FUNCTION ST_CommonDataModelToGeoJsonFilter(filter_expression text)
 RETURNS jsonb AS
 $BODY$
     SELECT jsonb_build_object(
@@ -705,7 +705,7 @@ $BODY$
         'geometry',   ST_GeomFromGeoJSON(geometry),
         'properties', to_jsonb(row) - 'id' - 'geometry'
       ) AS feature
-      FROM (SELECT * FROM filter($1, $2)) row) features;
+      FROM (SELECT * FROM filter($1)) row) features;
 $BODY$
 LANGUAGE SQL;
     

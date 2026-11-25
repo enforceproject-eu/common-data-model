@@ -36,7 +36,7 @@ public interface CommonDataModelRepository extends JpaRepository<CommonDataModel
      * 
      * @return a {@link String} object
      */
-    @Query("select st_commondatamodeltogeojsonfilter(:propertyName, :value)")
-    String getGeoJson(@Param("propertyName") String propertyName, @Param("value") String value);
+    @Query("select st_commondatamodeltogeojsonfilter(:expression)")
+    String getGeoJson(@Param("expression") String expression);
         
 }
