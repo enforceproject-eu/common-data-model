@@ -104,9 +104,11 @@ img.half {
                 
                 this.featureLayer = L.geoJSON(features, {
                     onEachFeature: (feature, layer) => {
-                        var content = "<h1>Incident: " + feature.properties.report_type + "</h1></br>";
-        			    content = content.concat("<h2>Observed at: " + feature.properties.observation_time + "<h2/>" + "</br>"
-                        + "<img class='half'' src='" + feature.properties.evidence_id + "' width='500px'/>" + "</br>");
+                        var content = "<h1>Observation: " + feature.properties.observation_type + "</h1></br>";
+        			    content = content.concat("<h2>Observed at: " + feature.properties.observation_time + "<h2/>" + "</br>");
+        			    if(feature.properties.evidence_id){
+        			    	content = content.concat("<img class='half'' src='" + feature.properties.evidence_id + "' width='500px'/>" + "</br>");
+        			    }
                         var customPopup = content;
 					    layer.bindPopup(customPopup);
                     }
