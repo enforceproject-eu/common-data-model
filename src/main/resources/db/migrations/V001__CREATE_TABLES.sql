@@ -680,7 +680,7 @@ $BODY$
         'geometry',   ST_GeomFromGeoJSON(geometry),
         'properties', to_jsonb(row) - 'id' - 'geometry'
       ) AS feature
-      FROM (SELECT * FROM public.cdm_full_properties) row) features;
+      FROM (SELECT * FROM public.cdm_full_properties limit 200) row) features;
 $BODY$
 LANGUAGE SQL;
     
